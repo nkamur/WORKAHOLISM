@@ -1,0 +1,62 @@
+﻿using System;
+using System.Drawing;
+using System.Windows.Forms;
+using System.Threading;
+
+static class Program
+{
+    static void Main()
+    {
+        /// <summary>
+        /// アプリケーションのメイン エントリ ポイントです。
+        /// </summary>
+        [STAThread]
+        ResidentTest rm = new ResidentTest();
+        Application.Run();
+    }
+}
+
+class ResidentTest :Form
+{
+    private Thread thread; //追加
+
+    public ResidentTest()
+    {
+        this.ShowInTaskbar = false;
+        this.setComponents();
+
+        thread = new Thread(intervalCheck); //追加
+        thread.Start();  //追加
+    }
+
+    private void Close_Click(object sender, EventArgs e)
+    {
+        thread.Abort();  //追加
+        Application.Exit();
+    }
+
+    //以下追加
+    private void intervalCheck()
+    {
+        while (true)
+        {
+            System.Threading.Thread.Sleep(10000);
+            MessageBox.Show("Test");
+        }
+    }
+
+    private void setComponents()
+    {
+        NotifyIcon icon = new NotifyIcon();
+        icon.Icon = new Icon("app.ico");
+        icon.Visible = true;
+        icon.Text = "常駐アプリテスト";
+        ContextMenuStrip menu = new ContextMenuStrip();
+        ToolStripMenuItem menuItem = new ToolStripMenuItem();
+        menuItem.Text = "&終了";
+        menuItem.Click += new EventHandler(Close_Click);
+        menu.Items.Add(menuItem);
+
+        icon.ContextMenuStrip = menu;
+    }
+}
