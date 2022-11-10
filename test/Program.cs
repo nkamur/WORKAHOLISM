@@ -15,11 +15,14 @@ namespace test
         [STAThread]
         static void Main()
         {
-            string exeName = @"D:\Debug\WORKAHOLISM.exe";
+            MessageBox.Show("test");
+            //string exeName = @"D:\Debug\WORKAHOLISM.exe";
+            string exeName = @"D:\WORKAHOLISM\WORKAHOLISM\bin\Debug\WORKAHOLISM.exe";
             string args = "";
             ProcessStartInfo startInfo = new ProcessStartInfo(exeName, args)
             {
-                Verb = "Runas"
+                Verb = "Runas",
+                UseShellExecute = false
             };
             Process process = Process.Start(startInfo);
             process.WaitForExit();

@@ -47,7 +47,8 @@ namespace WORKAHOLISM
         private void setComponents()
         {
             NotifyIcon icon = new NotifyIcon();
-            icon.Icon = new Icon("app.ico");
+            //icon.Icon = new Icon("app.ico");
+            icon.Icon = new Icon(SystemIcons.Shield, 40, 40);
             icon.Visible = true;
             icon.Text = "常駐アプリテスト";
             ContextMenuStrip menu = new ContextMenuStrip();

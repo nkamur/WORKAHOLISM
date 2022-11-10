@@ -15,6 +15,7 @@ namespace WORKAHOLISM
         [STAThread]
         static void Main()
         {
+            MessageBox.Show("WORKAHOLISM");
             ResidentTest rm = new ResidentTest();
             Application.Run();
         }
